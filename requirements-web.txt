@@ -1,0 +1,2 @@
+ddgs==9.16.0
+reportlab==5.0.1

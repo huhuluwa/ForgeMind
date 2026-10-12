@@ -1,0 +1,22 @@
+# Runtime and generated files
+.venv/
+__pycache__/
+*.py[cod]
+*.log
+logs/
+tmp/
+runstate/
+workspace/
+output/
+checkpoints/
+models/
+expert_kb/
+config/
+.env
+.env.*
+*api_key*
+*.gguf
+*.pth
+*.safetensors
+*.bin
+*.jsonl

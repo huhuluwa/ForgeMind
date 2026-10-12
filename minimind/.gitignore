@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.DS_Store
+out
+models/
+dataset/forge_magicoder_sft.jsonl
+dataset/forge_magicoder_sft.jsonl.manifest.json
+website/
+docs-minimind/
