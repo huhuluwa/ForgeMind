@@ -36,6 +36,6 @@ for ($i=0; $i -lt 30; $i++) {
     try { $health=Invoke-RestMethod 'http://127.0.0.1:8094/healthz' -TimeoutSec 2; if($health.status -eq 'ok'){$ready=$true;break} } catch { Start-Sleep 1 }
 }
 if (-not $ready) { throw 'Website did not become ready. Read logs/website-error.log.' }
-Start-Process 'http://127.0.0.1:8094/'
+if (-not $env:FORGEMIND_LAUNCHER) { Start-Process 'http://127.0.0.1:8094/' }
 'ForgeMind is ready: http://127.0.0.1:8094/'
 'OpenAI-compatible API: http://127.0.0.1:8091/v1'

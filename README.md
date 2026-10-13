@@ -6,7 +6,7 @@ ForgeMind 是基于 MiniMind 源码构建的本地 AI 项目，包含中文聊�
 
 完整 Windows/macOS 部署包和 Windows 桌面客户端放在 GitHub **Releases**，不是 Git 历史。由于部署 ZIP 有 4.72 GB，分成 `.001`、`.002`、`.003` 三个文件；下载全部分卷后按部署指南合并。每个分卷小于 GitHub Release 单文件 2 GiB 限制。
 
-Windows 桌面 EXE 是 WebView2 客户端。它不启动或托管模型/网页服务，也不包含模型权重；它连接已启动的本地 ForgeMind 服务：界面与搜索/专家接口 `http://127.0.0.1:8094/`，模型 API `http://127.0.0.1:8091/v1`。Windows 电脑如果没有 WebView2 Evergreen Runtime，需要按部署指南从微软官网安装。
+Windows 桌面 EXE 会自动定位本地部署包；服务未运行时，它执行部署包中的 `scripts/run_windows.ps1`，等待健康检查通过后在桌面窗口打开界面。模型权重仍由部署包提供。默认部署位置、首次启动依赖安装和 WebView2 要求见 [`desktop/README.md`](desktop/README.md)。
 
 ## 源码目录
 
@@ -18,4 +18,3 @@ Windows 桌面 EXE 是 WebView2 客户端。它不启动或托管模型/网页�
 - `docs/`：V4 图文教程。
 
 本仓库排除了 GGUF/权重、训练数据、checkpoint、运行日志、聊天记录和本机专家知识库。大模型文件在 Release 部署包中，训练数据与私人运行资料留在用户本机。
-

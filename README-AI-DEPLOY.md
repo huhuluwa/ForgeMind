@@ -12,12 +12,11 @@
 
 ## Windows 桌面 EXE
 
-1. EXE 是 WebView2 桌面客户端，只显示界面并连接已经运行的本地 ForgeMind 服务；它不启动或托管服务、不包含模型。
-2. 先按部署包 README 启动服务，确认 `http://127.0.0.1:8094/healthz` 正常，再把 `ForgeMind-Desktop-Windows-x64.exe` 放在 D 盘的部署目录后双击（客户端的 WebView2 缓存保存在 EXE 旁边的 `runstate\\webview2`）。
-3. 客户端打开完整聊天网页并调用本机服务。聊天、搜索、专家研究和文件导出由本地 ForgeMind 服务提供，模型 API 地址为 `http://127.0.0.1:8091/v1`。
-4. 如果客户端提示缺少 WebView2 Runtime，使用微软官方 WebView2 Evergreen 安装程序安装后重试：`https://developer.microsoft.com/microsoft-edge/webview2/`。不要从不明站点下载运行库。
-5. 如果 `8094` 不可用，回到部署包日志排查；不要声称 EXE 单独含有模型或可以离线完成推理。
-
+1. EXE 会先检查 `http://127.0.0.1:8094/healthz`；服务未运行时，自动定位部署包并执行 `scripts/run_windows.ps1`，等待服务就绪后打开桌面聊天窗口。
+2. 默认部署路径为 `D:\simon\ForgeMind-Work\project\output\ForgeMind-Portable-2026-10-12`。也可设置 `FORGEMIND_DEPLOYMENT_DIR`，或在启动时通过文件夹选择框选取包含 `scripts`、`models` 和 `runtime` 的部署根目录。
+3. 首次启动会创建本地 Python 环境并安装网页依赖，可能需要网络和几分钟时间。服务地址为网页 `http://127.0.0.1:8094/`、OpenAI 兼容 API `http://127.0.0.1:8091/v1`；EXE 本身不包含模型权重。
+4. 如果客户端提示缺少 WebView2 Runtime，使用微软官方 WebView2 Evergreen 安装程序安装后重试：`https://developer.microsoft.com/microsoft-edge/webview2/`。
+5. 启动失败时，读取部署目录 `logs/` 中的错误日志；不要声称未验证的功能可用。
 ## macOS 部署
 
 macOS 不使用 Windows EXE。使用完整 ZIP 内的 `scripts/run_macos.command` 启动服务，再在浏览器打开 `http://127.0.0.1:8094/`。依赖、空间、模型限制和验证要求见部署包 README。
@@ -25,4 +24,3 @@ macOS 不使用 Windows EXE。使用完整 ZIP 内的 `scripts/run_macos.command
 ## 隐私和报告
 
 默认仅绑定 `127.0.0.1`。不要上传模型、对话、日志、训练语料、checkpoint、知识库或任何 API 密钥。部署完成后明确报告机器检查值、服务地址、自检结果和未验证部分。
-
